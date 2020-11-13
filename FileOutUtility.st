@@ -19,40 +19,34 @@ initialize
 	systemOrganizer := SystemOrganization! !
 
 
-!FileOutUtility methodsFor: 'fileOut' stamp: 'MR 11/13/2020 19:26:19'!
+!FileOutUtility methodsFor: 'fileOut' stamp: 'MR 11/13/2020 19:51:59'!
 fileOut: category
-	| fileDirectory |
-	fileDirectory := self customDirectory // (category asFileName , '.st').
-	fileDirectory writeStreamDo: [ :fileStream |
+	| fileEntry |
+	fileEntry := self customDirectory // (category asFileName , '.st').
+	fileEntry writeStreamDo: [ :fileStream |
 						systemOrganizer fileOutCategory: category on: fileStream initializing: true.
 						customDirectory := DirectoryEntry withPathName: fileStream fileEntry parent asString].
 						^'File Out of class ', category, ' was succesfull.'.! !
 
-!FileOutUtility methodsFor: 'fileOut' stamp: 'MR 11/13/2020 19:18:44'!
-fileOut: category to: directory
-	^self shouldBeImplemented! !
+!FileOutUtility methodsFor: 'fileOut' stamp: 'MR 11/13/2020 19:51:16'!
+fileOut: category to: fileEntry
 
-!FileOutUtility methodsFor: 'fileOut' stamp: 'MR 11/13/2020 19:25:54'!
+	fileEntry writeStreamDo: [ :fileStream |
+							systemOrganizer fileOutCategory: category on: fileStream initializing: true.
+							customDirectory := DirectoryEntry withPathName: fileStream fileEntry parent asString].
+							^'File Out of class ',category, ' was succesfull.'.! !
+
+!FileOutUtility methodsFor: 'fileOut' stamp: 'MR 11/13/2020 19:50:36'!
 showFileOutMenuFor: category
 	
-	| fileDirectory choice customName |
+	| choice |
 
 	choice _ (PopUpMenu 		labels:			'File Out to last folder\Specify File Out destination\Cancel' withNewLines)
 		startUpWithCaption: 'How do you want to continue?'.
-	fileDirectory := self customDirectory // (category asFileName , '.st').
 	
 	choice = 1 ifTrue: [^self fileOut: category].
 
-	
-	
-	choice = 2 ifTrue: [customName _ self request: 'Enter a new file name' initialAnswer: fileDirectory asString.
-					fileDirectory := customName asFileEntry.
-					fileDirectory writeStreamDo: [ :fileStream |
-										systemOrganizer fileOutCategory: category on: fileStream initializing: true.
-										customDirectory := DirectoryEntry withPathName: fileStream fileEntry parent asString].
-										^'File Out of class ',category, ' was succesfull.'.
-		].
-
+	choice = 2 ifTrue: [			^self fileOut: category to: (self requestNewDirectoryFor: category)].
 	
 	self error: 'Please close this to abort fileOut'! !
 
@@ -60,3 +54,12 @@ showFileOutMenuFor: category
 !FileOutUtility methodsFor: 'testing' stamp: 'MR 11/8/2020 22:42:26'!
 currentCustomDirectory
 	^customDirectory asString! !
+
+
+!FileOutUtility methodsFor: 'private' stamp: 'MR 11/13/2020 19:55:11'!
+requestNewDirectoryFor: category
+	| fileEntry newFullFilePath |
+	fileEntry := self customDirectory // (category asFileName , '.st').
+	newFullFilePath _ self request: 'Enter a new file name' initialAnswer: fileEntry asString.
+	fileEntry := newFullFilePath asFileEntry.
+	^fileEntry! !
