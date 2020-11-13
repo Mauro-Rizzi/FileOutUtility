@@ -1,2 +1,2 @@
 # FileOutUtility
-FileOutUtility is a smallTalk class that seeks to add new behaviour to existing file out implementations.
+FileOutUtility is a SmallTalk class that seeks to add new behaviour to existing file out implementations.
