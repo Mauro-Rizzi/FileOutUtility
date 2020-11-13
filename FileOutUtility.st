@@ -10,13 +10,13 @@ fileOut: category
 
 	^self fileOut: category to: (self customFileEntryFor: category).! !
 
-!FileOutUtility methodsFor: 'fileOut' stamp: 'MR 11/13/2020 20:38:09'!
+!FileOutUtility methodsFor: 'fileOut' stamp: 'MR 11/13/2020 20:42:47'!
 fileOut: category to: fileEntry
 
 	fileEntry writeStreamDo: [ :fileStream |
 						systemOrganizer fileOutCategory: category on: fileStream initializing: true.
 						self updateCustomDirectoryFromFileStream: fileStream.].
-	(PopUpMenu 		labels:		'Ok') 	startUpWithCaption: 'FileOut was succesfull'.
+	self informSucessfullFileOut.
 	^'File Out of class ',category, ' was succesfull.'.! !
 
 !FileOutUtility methodsFor: 'fileOut' stamp: 'MR 11/13/2020 20:03:51'!
@@ -59,6 +59,11 @@ customFileEntryFor: category
 	^customDirectory // (category asFileName , '.st')
 	
 ! !
+
+!FileOutUtility methodsFor: 'private' stamp: 'MR 11/13/2020 20:41:38'!
+informSucessfullFileOut
+	
+	(PopUpMenu 		labels:		'Ok') 	startUpWithCaption: 'FileOut was succesfull'.! !
 
 !FileOutUtility methodsFor: 'private' stamp: 'MR 11/13/2020 20:06:31'!
 requestNewFileEntryFor: category
