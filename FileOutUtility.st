@@ -10,12 +10,12 @@ fileOut: category
 
 	^self fileOut: category to: (self customFileEntryFor: category).! !
 
-!FileOutUtility methodsFor: 'fileOut' stamp: 'MR 11/13/2020 20:28:53'!
+!FileOutUtility methodsFor: 'fileOut' stamp: 'MR 11/13/2020 20:38:09'!
 fileOut: category to: fileEntry
 
 	fileEntry writeStreamDo: [ :fileStream |
-							systemOrganizer fileOutCategory: category on: fileStream initializing: true.
-							customDirectory := DirectoryEntry withPathName: fileStream fileEntry parent asString].
+						systemOrganizer fileOutCategory: category on: fileStream initializing: true.
+						self updateCustomDirectoryFromFileStream: fileStream.].
 	(PopUpMenu 		labels:		'Ok') 	startUpWithCaption: 'FileOut was succesfull'.
 	^'File Out of class ',category, ' was succesfull.'.! !
 
@@ -67,3 +67,10 @@ requestNewFileEntryFor: category
 	newFullFilePath _ self request: 'Enter a new file name' initialAnswer: fileEntry asString.
 	fileEntry := newFullFilePath asFileEntry.
 	^fileEntry! !
+
+!FileOutUtility methodsFor: 'private' stamp: 'MR 11/13/2020 20:38:21'!
+updateCustomDirectoryFromFileStream: aFileStream
+	"I'm not sure i like this implementation, but i'm also not sure if there's a better cross-platform way to update the directory with the parent of the current fileStream"
+	customDirectory := DirectoryEntry withPathName: aFileStream fileEntry parent asString
+	
+! !
