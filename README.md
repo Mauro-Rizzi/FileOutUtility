@@ -19,6 +19,8 @@ Once you do this you will be able to use this instance to file out as follows:
 	InsertObjectNameHere showFileOutMenuFor: '<CategoryNameHere>' -> This will show a menu asking if you want to file out to the last directory or if you want to specify a new destination
 	InsertObjectNameHere fileOut: '<CategoryNameHere>' -> This will attempt to fileOut the category to the last directory used
 	InsertObjectNameHere: fileOutToNewDestination: '<CategoryNameHere>' -> This method will ask you where you want to do the fileOut to.
+
+As of 17/11/2020 this repo also contains a SmallTalk package that automatically ads the two options to the context menu for class browsers and generates a global instance of the class called FileOutHelper
 	
 Note: If you haven't used fileOut before with this instance of FileOutUtility the default location will be the smallTalkImage path, just like with the current implementation of fileOut.
 
