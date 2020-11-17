@@ -10,14 +10,15 @@ fileOut: category
 
 	^self fileOut: category toFileEntry: (self customFileEntryFor: category).! !
 
-!FileOutUtility methodsFor: 'fileOut' stamp: 'MR 11/17/2020 16:30:31'!
+!FileOutUtility methodsFor: 'fileOut' stamp: 'MR 11/17/2020 17:05:17'!
 fileOut: category toFileEntry: fileEntry
 
 	fileEntry writeStreamDo: [ :fileStream |
 						systemOrganizer fileOutCategory: category on: fileStream initializing: true.
 						self updateCustomDirectoryFromFileStream: fileStream.].
-	self informSucessfullFileOut.
-	^'File Out of class ',category, ' was succesfull.'.! !
+					
+	^self informSucessfullFileOut.
+	! !
 
 !FileOutUtility methodsFor: 'fileOut' stamp: 'MR 11/17/2020 16:32:36'!
 fileOutToNewDestination: category
@@ -57,18 +58,18 @@ customDirectory
 	
 ! !
 
-!FileOutUtility methodsFor: 'private' stamp: 'MR 11/13/2020 20:05:46'!
+!FileOutUtility methodsFor: 'private' stamp: 'MR 11/17/2020 17:06:18'!
 customFileEntryFor: category
 	
-	customDirectory ifNil: [		customDirectory _ DirectoryEntry smalltalkImageDirectory ].
-	^customDirectory // (category asFileName , '.st')
+	^self customDirectory // (category asFileName , '.st')
 	
 ! !
 
-!FileOutUtility methodsFor: 'private' stamp: 'MR 11/13/2020 20:41:38'!
+!FileOutUtility methodsFor: 'private' stamp: 'MR 11/17/2020 17:05:47'!
 informSucessfullFileOut
 	
-	(PopUpMenu 		labels:		'Ok') 	startUpWithCaption: 'FileOut was succesfull'.! !
+	(PopUpMenu 		labels:		'Ok') 	startUpWithCaption: 'FileOut was succesfull'.
+	^'FileOut was succesfull.'.! !
 
 !FileOutUtility methodsFor: 'private' stamp: 'MR 11/13/2020 20:06:31'!
 requestNewFileEntryFor: category
