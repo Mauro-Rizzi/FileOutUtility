@@ -16,7 +16,7 @@ This can be done with the following collaborations:
 	
 Once you do this you will be able to use this instance to file out as follows:
 
-	InsertObjectNameHere showFileOutMenuFor: '<CategoryNameHere>' -> This will show a menu asking if you want to file out to the last directory or if you want to specify a new destionation
+	InsertObjectNameHere showFileOutMenuFor: '<CategoryNameHere>' -> This will show a menu asking if you want to file out to the last directory or if you want to specify a new destination
 	InsertObjectNameHere fileOut: '<CategoryNameHere>' -> This will attempt to fileOut the category to the last directory used
 	InsertObjectNameHere: fileOutToNewDestination: '<CategoryNameHere>' -> This method will ask you where you want to do the fileOut to.
 	
