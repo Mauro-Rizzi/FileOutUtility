@@ -5,13 +5,13 @@ Object subclass: #FileOutUtility
 	poolDictionaries: ''
 	category: 'FileOutUtility'!
 
-!FileOutUtility methodsFor: 'fileOut' stamp: 'MR 11/13/2020 20:09:13'!
+!FileOutUtility methodsFor: 'fileOut' stamp: 'MR 11/17/2020 16:30:31'!
 fileOut: category
 
-	^self fileOut: category to: (self customFileEntryFor: category).! !
+	^self fileOut: category toFileEntry: (self customFileEntryFor: category).! !
 
-!FileOutUtility methodsFor: 'fileOut' stamp: 'MR 11/13/2020 20:42:47'!
-fileOut: category to: fileEntry
+!FileOutUtility methodsFor: 'fileOut' stamp: 'MR 11/17/2020 16:30:31'!
+fileOut: category toFileEntry: fileEntry
 
 	fileEntry writeStreamDo: [ :fileStream |
 						systemOrganizer fileOutCategory: category on: fileStream initializing: true.
@@ -19,7 +19,12 @@ fileOut: category to: fileEntry
 	self informSucessfullFileOut.
 	^'File Out of class ',category, ' was succesfull.'.! !
 
-!FileOutUtility methodsFor: 'fileOut' stamp: 'MR 11/13/2020 20:03:51'!
+!FileOutUtility methodsFor: 'fileOut' stamp: 'MR 11/17/2020 16:32:36'!
+fileOutToNewDestination: category
+
+	^self fileOut: category toFileEntry: (self requestNewFileEntryFor: category)! !
+
+!FileOutUtility methodsFor: 'fileOut' stamp: 'MR 11/17/2020 16:32:59'!
 showFileOutMenuFor: category
 	
 	| choice |
@@ -29,7 +34,7 @@ showFileOutMenuFor: category
 	
 	choice = 1 ifTrue: [^self fileOut: category].
 
-	choice = 2 ifTrue: [			^self fileOut: category to: (self requestNewFileEntryFor: category)].
+	choice = 2 ifTrue: [			^self fileOutToNewDestination: category].
 	"I'm not sure why fileOut throws an error if you cancel, can't we just tell the user the attempt was cancelled with a pop up?"
 	self error: 'Please close this to abort fileOut'! !
 
