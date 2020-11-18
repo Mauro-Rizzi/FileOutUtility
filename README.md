@@ -1,4 +1,10 @@
 # FileOutUtility
+
+## Note: As of 18/11/2020 work on this repo will no longer continue. This category and package are being replaced with [a new one](https://github.com/Mauro-Rizzi/FileOutRework) that directly implements the behaviour of this class to base system classes.
+If you installed the package included in this repo at some point and you want to remove it you will have to run the following collaboration to remove the FileOutHelper global object:
+
+	Smalltalk removeKey: FileOutHelper
+
 FileOutUtility is a SmallTalk class that seeks to change the behaviour of existing file out implementations as to improve git workflow.
 
 The class was implemented as to prototype the black box behaviour the different system implementations should use.
@@ -24,4 +30,3 @@ As of 17/11/2020 this repo also contains a SmallTalk package that automatically 
 	
 Note: If you haven't used fileOut before with this instance of FileOutUtility the default location will be the smallTalkImage path, just like with the current implementation of fileOut.
 
-## Note: As of 18/11/2020 work on this repo will no longer continue. I will be working on [a new repo](https://github.com/Mauro-Rizzi/FileOutRework) that will directly implement the behaviour of this class to base system classes.
