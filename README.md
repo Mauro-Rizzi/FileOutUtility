@@ -1,7 +1,7 @@
 # FileOutUtility
 FileOutUtility is a SmallTalk class that seeks to change the behaviour of existing file out implementations as to improve git workflow.
 
-As of now the class was implemented as to prototype the black box behaviour the different system implementations should use.
+The class was implemented as to prototype the black box behaviour the different system implementations should use.
 
 Specifically the idea that the system should remember where you did your last fileOut and you should have the option to choose a destination manually rather than only if there's already an identically named file there.
 
@@ -24,3 +24,4 @@ As of 17/11/2020 this repo also contains a SmallTalk package that automatically 
 	
 Note: If you haven't used fileOut before with this instance of FileOutUtility the default location will be the smallTalkImage path, just like with the current implementation of fileOut.
 
+## Note: As of 18/11/2020 work on this repo will no longer continue. I will be working on [a new repo](https://github.com/Mauro-Rizzi/FileOutRework) that will directly implement the behaviour of this class to base system classes.
